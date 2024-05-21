@@ -1,10 +1,10 @@
-<div class="outerBox " *ngIf="!toggleRating">
+<div class="outerBox " *ngIf="!toggleRating" id="scrollableElement">
     <div style="margin-top: 70px;" *ngFor="let dtt of previousSearch">
         <div class="row">
             <div class="IconCard">
                 <div ><span><i class="fa fa-user" style="font-size:20px"></i></span></div>
             </div>
-            <div class="mainCard2">
+            <div class="mainCard2" style="white-space: pre-line">
                 {{dtt.req}}
             </div>
            </div>
@@ -27,7 +27,7 @@
            <br><br>
        </div>
 
-    <div class="toolBar">
+    <div class="toolBar" *ngIf="ref!='rating'">
         <div></div>
         <div class="box3 px-3 py-1" (click)="togglePanel()">
             <span class="px-1"><i [ngClass]="toggleUp?'fa fa-eye px-1':'fa fa-eye-slash px-2'"></i>{{toggleUp?"Show draft":"Hide draft"}}</span>
@@ -49,7 +49,7 @@
         <div class="IconCard">
             <div ><span><i  class="fa fa-user" style="font-size:20px"></i></span></div>
         </div>
-        <div class="mainCard2">
+        <div class="mainCard2" >
             {{selectedContent.req}}
         </div>
        </div>
@@ -104,4 +104,4 @@
     <br>
     </div>
 </div>
-<app-rating [Category]="Category" [res]="ref!='rating'?selectedContent.res:queryDraft" [ref]="ref" [req]="reqText" class="outerBox" *ngIf="toggleRating" (modalsave)="resp()"></app-rating>
+<app-rating [Category]="Category" [res]="ref!='rating'?selectedContent.res:[selectedContent.res]" [ref]="ref" [req]="reqText" class="outerBox" *ngIf="toggleRating" (modalsave)="resp()"></app-rating>

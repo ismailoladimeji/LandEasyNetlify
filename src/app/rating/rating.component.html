@@ -44,9 +44,10 @@
                        
                             <select class="form-select form-select-sm frele" *ngIf="ref!='rating'" aria-label=".form-select-sm example" required  [(ngModel)]="Category" >
                                 <option selected value="0">select Category</option>
-                                <option value="Science">Science</option>
+                                <option [value]="itm" *ngFor="let itm of ListCategory">{{itm}}</option>
+                                <!-- <option value="Science">Science</option>
                                 <option value="Politics">Politics</option>
-                                <option value="Art">Art</option>
+                                <option value="Art">Art</option> -->
                               </select>
                               <input class="form-control" [value]="this.Category" *ngIf="ref=='rating'" disabled>
                     </div>
@@ -58,7 +59,7 @@
                         <div>
                         <div><strong>{{"Question:"}}&nbsp;{{req}}</strong></div>
                           <span *ngIf="ref!='rating'">{{"Please evaluate this response based on"}} <strong>{{itm.ranking}}</strong></span>
-                          <span *ngIf="ref=='rating'">{{"Please rank this response to the above question"}}</span>
+                          <span *ngIf="ref=='rating'">{{"Please rank the response to the above question"}}</span>
                         </div>
                       </div>
                       <br>
@@ -69,7 +70,7 @@
                           <input type="radio" checked="checked" [name]="'radio2'+index" [value]="itm.view==1?item.value:item.indication" class="form-control ele"
                             [(ngModel)]='rankingData' [ngModelOptions]="{standalone: true}">
                           <span class="checkmark"></span>
-                           <span class="fon" *ngIf="itm.view==1">{{(ref=='rating'&&index==itm.indicator.length-1)?item.indication:item.value}}</span>
+                          <span class="fon" *ngIf="itm.view==1">{{(ref=='rating'&&item.value=="6")?item.indication:item.value}}</span>
                            <span class="fon"  *ngIf="itm.view==0">{{(ref=='rating'&&index==itm.indicator.length-1)?item.value:item.indication}}</span>
                         </label>
   
@@ -89,12 +90,12 @@
                <div class="col-md-12">
                 <br>
                 <div class="form-group ">
-                    <label class="small mb-1" for="learningObjective">Additional Comment (Optional)
+                    <label class="small mb-1" for="learningObjective">{{ref!='rating'?"Additional Comment (Optional)":"Alternative Response (Optional)"}}
                         <!-- <span style="color:red">*</span> -->
                     </label><br>
                     <textarea name="CComment" class="form-control ele" id="Comment" col="5"
-                        [(ngModel)]="model['alternative response']" #ClearningObjective="ngModel"
-                        placeholder="Comment"></textarea>
+                        [(ngModel)]="responseData" #ClearningObjective="ngModel"
+                        [placeholder]='ref!="rating"?"Additional Comment":"Alternative Response"'></textarea>
                 </div>
             </div>
          
